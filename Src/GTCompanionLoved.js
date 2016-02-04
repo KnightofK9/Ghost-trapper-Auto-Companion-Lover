@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Ghost trapper Auto Companion Lover
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Help you send gift to companion you loved.Make sure to install ghost trapper companion companion, disabled it or companion script to stop sending. Gift send automatically to and companion that can receives gift!!
 // @author       Knight of K9
 // @grant        none
 // @include      http://www.ghost-trappers.com/fb/setup.php?type=companion*
+// @match        https://github.com/KnightofK9/Ghost-trapper-Auto-Companion-Lover
 // ==/UserScript==
 /* jshint -W097 */
 'use strict';

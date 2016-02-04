@@ -12,39 +12,44 @@
 'use strict';
 
 // Your code here...
-if(!localStorage.getItem('isSendGiftAllowed')){
+console.log("isSendGiftAllowed state : "+localStorage.isSendGiftAllowed);
+if(localStorage.getItem('isSendGiftAllowed')==null){
     //Init isSendGiftAllowed if haven't created
     localStorage.setItem('isSendGiftAllowed',true)
+    console.log("init isSendGiftAllowed");
 }
-var isSendGiftAllowed = localStorage.getItem('isSendGiftAllowed');
 var count  = 0;
-if(isSendGiftAllowed){
+if(localStorage.isSendGiftAllowed=="true"){
     console.log(count++);
     sendGift();
 }
 
 //Button for enable/disable auto send gift
 var button = document.createElement("button");
+button.setAttribute("id","giftButton");
 var text;
-if(!isSendGiftAllowed){
+if(!(localStorage.isSendGiftAllowed=="true")){
     text = document.createTextNode("Enable auto send gift");
 }
 else{
     text = document.createTextNode("Disable auto send gift");
 }
 button.appendChild(text);
-button.onclick = changeAutoGiftAllowed();
+button.onclick = changeAutoGiftAllowed;
 document.body.appendChild(button);
 
 function changeAutoGiftAllowed(){
-    if(isSendGiftAllowed){
+    if(localStorage.isSendGiftAllowed=="true"){
         alert("Auto send gift disabled!");
+        button.textContent=("Enable auto send gift");
     }
     else{
         alert("Auto send gift enabled!");
+        button.textContent=("Disable auto send gift");
     }
-    isSendGiftAllowed=!isSendGiftAllowed;
-    console.log(localStorage.getItem('isSendGiftAllowed'));
+    localStorage.isSendGiftAllowed=(localStorage.isSendGiftAllowed=="true"?false:true);
+
+    console.log(localStorage.isSendGiftAllowed);
 }
 
 function sendGift(){

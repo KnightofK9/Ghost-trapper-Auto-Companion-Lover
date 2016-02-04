@@ -12,27 +12,63 @@
 'use strict';
 
 // Your code here...
-var checkButton = document.getElementsByName("present_id")[0];
-var gift = document.getElementsByClassName("smallPresentText")[0];
-if(gift != null)
-{
-    var giftName = gift.textContent;
-    var sendButton = document.getElementsByName("confirm")[1];
-    console.log("Are u sure u want to send "+ giftName +" with value = "+checkButton.value);
-    if (giftName.indexOf("(")>=0 && giftName.indexOf(")")>=0) {
-        if(giftName.indexOf("(?)")>=0){
-            alert("No gift information found!!");
-        }
-        else{
-            checkButton.checked = true;
-            sendButton.click();
-        }
-    } 
-    else {
-        alert("No companion script found!Have you installed ghost trapper companion companion?");
-    }
+if(!localStorage.getItem('isSendGiftAllowed')){
+    //Init isSendGiftAllowed if haven't created
+    localStorage.setItem('isSendGiftAllowed',true)
 }
-else{
-    console.log("Your companion can not receive gift !!")
+var isSendGiftAllowed = localStorage.getItem('isSendGiftAllowed');
+var count  = 0;
+if(isSendGiftAllowed){
+    console.log(count++);
+    sendGift();
 }
 
+//Button for enable/disable auto send gift
+var button = document.createElement("button");
+var text;
+if(!isSendGiftAllowed){
+    text = document.createTextNode("Enable auto send gift");
+}
+else{
+    text = document.createTextNode("Disable auto send gift");
+}
+button.appendChild(text);
+button.onclick = changeAutoGiftAllowed();
+document.body.appendChild(button);
+
+function changeAutoGiftAllowed(){
+    if(isSendGiftAllowed){
+        alert("Auto send gift disabled!");
+    }
+    else{
+        alert("Auto send gift enabled!");
+    }
+    isSendGiftAllowed=!isSendGiftAllowed;
+    console.log(localStorage.getItem('isSendGiftAllowed'));
+}
+
+function sendGift(){
+    var checkButton = document.getElementsByName("present_id")[0];
+    var gift = document.getElementsByClassName("smallPresentText")[0];
+    if(gift != null)
+    {
+        var giftName = gift.textContent;
+        var sendButton = document.getElementsByName("confirm")[1];
+        console.log("Are u sure u want to send "+ giftName +" with value = "+checkButton.value);
+        if (giftName.indexOf("(")>=0 && giftName.indexOf(")")>=0) {
+            if(giftName.indexOf("(?)")>=0){
+                alert("No gift information found!!");
+            }
+            else{
+                checkButton.checked = true;
+                sendButton.click();
+            }
+        }
+        else {
+            alert("No companion script found!Have you installed ghost trapper companion companion?");
+        }
+    }
+    else{
+        console.log("Your companion can not receive gift !!")
+    }
+}

@@ -5,14 +5,12 @@
 // @description  Help you send gift to companion you loved.Make sure to install ghost trapper companion companion, disabled it or companion script to stop sending. Gift send automatically to and companion that can receives gift!!
 // @author       Knight of K9
 // @grant        none
-// @include      http://www.ghost-trappers.com/fb/setup.php?type=companion*
-// @match        https://github.com/KnightofK9/Ghost-trapper-Auto-Companion-Lover
+// @include      http://www.ghost-trappers.com/fb/*
 // ==/UserScript==
 /* jshint -W097 */
 'use strict';
 
 // Your code here...
-console.log("isSendGiftAllowed state : "+localStorage.isSendGiftAllowed);
 if(localStorage.getItem('isSendGiftAllowed')==null){
     //Init isSendGiftAllowed if haven't created
     localStorage.setItem('isSendGiftAllowed',true)
